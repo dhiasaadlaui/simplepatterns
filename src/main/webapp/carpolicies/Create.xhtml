@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PolicyCreateDlg" widgetVar="PolicyCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePolicyTitle}">
+            <h:form id="PolicyCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{policyController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{policyController.selected.identifier}" title="#{bundle.CreatePolicyTitle_identifier}" required="true" requiredMessage="#{bundle.CreatePolicyRequiredMessage_identifier}"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_creationDate}" for="creationDate" />
+                        <p:calendar id="creationDate" pattern="MM/dd/yyyy" value="#{policyController.selected.creationDate}" title="#{bundle.EditPolicyTitle_creationDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/dd/yyyy" value="#{policyController.selected.startDate}" title="#{bundle.EditPolicyTitle_startDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_endDate}" for="endDate" />
+                        <p:calendar id="endDate" pattern="MM/dd/yyyy" value="#{policyController.selected.endDate}" title="#{bundle.EditPolicyTitle_endDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_totalAmount}" for="totalAmount" />
+                        <p:inputText id="totalAmount" value="#{policyController.selected.totalAmount}" title="#{bundle.CreatePolicyTitle_totalAmount}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_currentAmount}" for="currentAmount" />
+                        <p:inputText id="currentAmount" value="#{policyController.selected.currentAmount}" title="#{bundle.CreatePolicyTitle_currentAmount}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{policyController.selected.status}" title="#{bundle.CreatePolicyTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_isActive}" for="isActive" />
+                        <p:selectBooleanCheckbox id="isActive" value="#{policyController.selected.isActive}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_billAmount}" for="billAmount" />
+                        <p:inputText id="billAmount" value="#{policyController.selected.billAmount}" title="#{bundle.CreatePolicyTitle_billAmount}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_bullsNumber}" for="bullsNumber" />
+                        <p:inputText id="bullsNumber" value="#{policyController.selected.bullsNumber}" title="#{bundle.CreatePolicyTitle_bullsNumber}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_nextBillDate}" for="nextBillDate" />
+                        <p:calendar id="nextBillDate" pattern="MM/dd/yyyy" value="#{policyController.selected.nextBillDate}" title="#{bundle.EditPolicyTitle_nextBillDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_insuranceType}" for="insuranceType" />
+                        <p:inputText id="insuranceType" value="#{policyController.selected.insuranceType}" title="#{bundle.CreatePolicyTitle_insuranceType}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_carModel}" for="carModel" />
+                        <p:inputText id="carModel" value="#{policyController.selected.carModel}" title="#{bundle.CreatePolicyTitle_carModel}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_carFiscalPower}" for="carFiscalPower" />
+                        <p:inputText id="carFiscalPower" value="#{policyController.selected.carFiscalPower}" title="#{bundle.CreatePolicyTitle_carFiscalPower}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_carGreycardNumber}" for="carGreycardNumber" />
+                        <p:inputText id="carGreycardNumber" value="#{policyController.selected.carGreycardNumber}" title="#{bundle.CreatePolicyTitle_carGreycardNumber}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_carConstructionYear}" for="carConstructionYear" />
+                        <p:calendar id="carConstructionYear" pattern="MM/dd/yyyy" value="#{policyController.selected.carConstructionYear}" title="#{bundle.EditPolicyTitle_carConstructionYear}"  showOn="button"/>
+                      <p:outputLabel value="#{bundle.CreatePolicyLabel_broker}" for="broker" />
+                        <p:selectOneMenu id="broker" value="#{policyController.selected.broker}" >
+                            <f:selectItems value="#{brokerController.itemsAvailableSelectOne}"
+                                           var="brokerItem"
+                                           itemValue="#{brokerItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_client}" for="client" />
+                        <p:selectOneMenu id="client" value="#{policyController.selected.client}" >
+                            <f:selectItems value="#{clientController.itemsAvailableSelectOne}"
+                                           var="clientItem"
+                                           itemValue="#{clientItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{policyController.create}" value="#{bundle.Save}" update="display,:PolicyListForm:datalist,:growl" oncomplete="handleSubmit(args,'PolicyCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PolicyCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BrokerEditDlg" widgetVar="BrokerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditBrokerTitle}">
+            <h:form id="BrokerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{brokerController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditBrokerLabel_identifier}" for="identifier" />
+                        <p:inputText id="identifier" value="#{brokerController.selected.identifier}" title="#{bundle.EditBrokerTitle_identifier}" required="true" requiredMessage="#{bundle.EditBrokerRequiredMessage_identifier}"/>
+                        <p:outputLabel value="#{bundle.EditBrokerLabel_fullName}" for="fullName" />
+                        <p:inputText id="fullName" value="#{brokerController.selected.fullName}" title="#{bundle.EditBrokerTitle_fullName}" />
+                        <p:outputLabel value="#{bundle.EditBrokerLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{brokerController.selected.username}" title="#{bundle.EditBrokerTitle_username}" />
+                        <p:outputLabel value="#{bundle.EditBrokerLabel_role}" for="role" />
+                        <p:selectOneMenu id="role" value="#{brokerController.selected.role}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{roleController.itemsAvailableSelectOne}"
+                                           var="roleItem"
+                                           itemValue="#{roleItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{brokerController.update}" value="#{bundle.Save}" update="display,:BrokerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'BrokerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BrokerEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

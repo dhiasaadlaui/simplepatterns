@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PolicyCreateDlg" widgetVar="PolicyCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePolicyTitle}">
+            <h:form id="PolicyCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{policyController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_startDate}" for="startDate" />
+                        <p:calendar id="startDate" pattern="MM/dd/yyyy" value="#{policyController.selected.startDate}" title="#{bundle.EditPolicyTitle_startDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_endDate}" for="endDate" />
+                        <p:calendar id="endDate" pattern="MM/dd/yyyy" value="#{policyController.selected.endDate}" title="#{bundle.EditPolicyTitle_endDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_status}" for="status" />
+                        <p:inputText id="status" value="#{policyController.selected.status}" title="#{bundle.CreatePolicyTitle_status}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_isActive}" for="isActive" />
+                        <p:selectBooleanCheckbox id="isActive" value="#{policyController.selected.isActive}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_lifeInsuredBirthDate}" for="lifeInsuredBirthDate" />
+                        <p:calendar id="lifeInsuredBirthDate" pattern="MM/dd/yyyy" value="#{policyController.selected.lifeInsuredBirthDate}" title="#{bundle.EditPolicyTitle_lifeInsuredBirthDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_lifeInsuredIsSmoker}" for="lifeInsuredIsSmoker" />
+                        <p:selectBooleanCheckbox id="lifeInsuredIsSmoker" value="#{policyController.selected.lifeInsuredIsSmoker}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_lifeInsuredHealthCovered}" for="lifeInsuredHealthCovered" />
+                        <p:selectBooleanCheckbox id="lifeInsuredHealthCovered" value="#{policyController.selected.lifeInsuredHealthCovered}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_lifeInsuredCapital}" for="lifeInsuredCapital" />
+                        <p:inputText id="lifeInsuredCapital" value="#{policyController.selected.lifeInsuredCapital}" title="#{bundle.CreatePolicyTitle_lifeInsuredCapital}" />
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_broker}" for="broker" />
+                        <p:selectOneMenu id="broker" value="#{policyController.selected.broker}" >
+                            <f:selectItems value="#{brokerController.itemsAvailableSelectOne}"
+                                           var="brokerItem"
+                                           itemValue="#{brokerItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePolicyLabel_client}" for="client" />
+                        <p:selectOneMenu id="client" value="#{policyController.selected.client}" >
+                            <f:selectItems value="#{clientController.itemsAvailableSelectOne}"
+                                           var="clientItem"
+                                           itemValue="#{clientItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+
+
+                    <ui:repeat value="#{policyController.carFields.keySet}" var="field">
+                        <div class="field">
+                            <h:inputText value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'TEXT'}" />
+                            <h:inputSecret value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'SECRET'}" />
+                            <h:inputTextarea value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'TEXTAREA'}" />
+                            <h:selectOneRadio value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'RADIO'}">
+                                <f:selectItems value="#{policyController.lifeFields.get(field).value}" />
+                            </h:selectOneRadio>
+                            <h:selectOneMenu value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'SELECTONE'}">
+                                <f:selectItems value="#{field.possiblevaluesList}" />
+                            </h:selectOneMenu>
+                            <h:selectManyMenu value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'SELECTMANY'}">
+                                <f:selectItems value="#{field.possiblevaluesList}" />
+                            </h:selectManyMenu>
+                            <h:selectBooleanCheckbox value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'CHECKONE'}" />
+                            <h:selectManyCheckbox value="#{policyController.lifeFields.get(field).value}" rendered="#{field.getAnswerType() == 'CHECKMANY'}">
+                                <f:selectItems value="#{field.possiblevaluesList}" />
+                            </h:selectManyCheckbox>
+                        </div>
+                    </ui:repeat>
+
+                    <p:commandButton actionListener="#{policyController.createCar}" value="#{bundle.Save}" update="display,:PolicyListForm:datalist,:growl" oncomplete="handleSubmit(args,'PolicyCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PolicyCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

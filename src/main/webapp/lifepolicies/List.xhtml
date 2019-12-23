@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPolicyTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PolicyListForm">
+                <p:panel header="#{bundle.ListPolicyTitle}">
+                    <p:dataTable id="datalist" value="#{policyController.items}" var="item"
+                                 selectionMode="single" selection="#{policyController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.identifier}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_identifier}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.identifier}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_creationDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.creationDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_startDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.startDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_endDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.endDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_totalAmount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.totalAmount}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_currentAmount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.currentAmount}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_status}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.status}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_isActive}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.isActive}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_billAmount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.billAmount}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_bullsNumber}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bullsNumber}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_nextBillDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nextBillDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                     
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredRetirementAge}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lifeInsuredRetirementAge}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredBirthDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lifeInsuredBirthDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredIsSmoker}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.lifeInsuredIsSmoker}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredHealthCovered}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.lifeInsuredHealthCovered}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredLoanEligible}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.lifeInsuredLoanEligible}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredMaxLoanAmount}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lifeInsuredMaxLoanAmount}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_lifeInsuredCapital}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lifeInsuredCapital}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_broker}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.broker}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPolicyTitle_client}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.client}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{policyController.prepareCreate}" update=":PolicyCreateForm" oncomplete="PF('PolicyCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PolicyViewForm" oncomplete="PF('PolicyViewDialog').show()" disabled="#{empty policyController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PolicyEditForm" oncomplete="PF('PolicyEditDialog').show()" disabled="#{empty policyController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{policyController.destroy}" update=":growl,datalist" disabled="#{empty policyController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

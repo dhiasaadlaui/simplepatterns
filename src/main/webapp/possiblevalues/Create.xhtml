@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PossiblevaluesCreateDlg" widgetVar="PossiblevaluesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePossiblevaluesTitle}">
+            <h:form id="PossiblevaluesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{possiblevaluesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePossiblevaluesLabel_value}" for="value" />
+                        <p:inputText id="value" value="#{possiblevaluesController.selected.value}" title="#{bundle.CreatePossiblevaluesTitle_value}" />
+                        <p:outputLabel value="#{bundle.CreatePossiblevaluesLabel_displayLabel}" for="displayLabel" />
+                        <p:inputText id="displayLabel" value="#{possiblevaluesController.selected.displayLabel}" title="#{bundle.CreatePossiblevaluesTitle_displayLabel}" />
+                        <p:outputLabel value="#{bundle.CreatePossiblevaluesLabel_question}" for="question" />
+                        <p:selectOneMenu id="question" value="#{possiblevaluesController.selected.question}" >
+                            <f:selectItems value="#{questionController.itemsAvailableSelectOne}"
+                                           var="questionItem"
+                                           itemValue="#{questionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{possiblevaluesController.create}" value="#{bundle.Save}" update="display,:PossiblevaluesListForm:datalist,:growl" oncomplete="handleSubmit(args,'PossiblevaluesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PossiblevaluesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

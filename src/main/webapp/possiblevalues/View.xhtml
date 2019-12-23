@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PossiblevaluesViewDlg" widgetVar="PossiblevaluesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPossiblevaluesTitle}">
+            <h:form id="PossiblevaluesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{possiblevaluesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPossiblevaluesLabel_identifier}"/>
+                        <h:outputText value="#{possiblevaluesController.selected.identifier}" title="#{bundle.ViewPossiblevaluesTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewPossiblevaluesLabel_value}"/>
+                        <h:outputText value="#{possiblevaluesController.selected.value}" title="#{bundle.ViewPossiblevaluesTitle_value}"/>
+                        <h:outputText value="#{bundle.ViewPossiblevaluesLabel_displayLabel}"/>
+                        <h:outputText value="#{possiblevaluesController.selected.displayLabel}" title="#{bundle.ViewPossiblevaluesTitle_displayLabel}"/>
+                        <h:outputText value="#{bundle.ViewPossiblevaluesLabel_question}"/>
+                        <h:outputText value="#{possiblevaluesController.selected.question}" title="#{bundle.ViewPossiblevaluesTitle_question}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PossiblevaluesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

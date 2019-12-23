@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PolicyViewDlg" widgetVar="PolicyViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPolicyTitle}">
+            <h:form id="PolicyViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{policyController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPolicyLabel_identifier}"/>
+                        <h:outputText value="#{policyController.selected.identifier}" title="#{bundle.ViewPolicyTitle_identifier}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_creationDate}"/>
+                        <h:outputText value="#{policyController.selected.creationDate}" title="#{bundle.ViewPolicyTitle_creationDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_startDate}"/>
+                        <h:outputText value="#{policyController.selected.startDate}" title="#{bundle.ViewPolicyTitle_startDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_endDate}"/>
+                        <h:outputText value="#{policyController.selected.endDate}" title="#{bundle.ViewPolicyTitle_endDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_totalAmount}"/>
+                        <h:outputText value="#{policyController.selected.totalAmount}" title="#{bundle.ViewPolicyTitle_totalAmount}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_currentAmount}"/>
+                        <h:outputText value="#{policyController.selected.currentAmount}" title="#{bundle.ViewPolicyTitle_currentAmount}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_status}"/>
+                        <h:outputText value="#{policyController.selected.status}" title="#{bundle.ViewPolicyTitle_status}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_isActive}"/>
+                        <p:selectBooleanCheckbox value="#{policyController.selected.isActive}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_billAmount}"/>
+                        <h:outputText value="#{policyController.selected.billAmount}" title="#{bundle.ViewPolicyTitle_billAmount}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_bullsNumber}"/>
+                        <h:outputText value="#{policyController.selected.bullsNumber}" title="#{bundle.ViewPolicyTitle_bullsNumber}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_nextBillDate}"/>
+                        <h:outputText value="#{policyController.selected.nextBillDate}" title="#{bundle.ViewPolicyTitle_nextBillDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_insuranceType}"/>
+                        <h:outputText value="#{policyController.selected.insuranceType}" title="#{bundle.ViewPolicyTitle_insuranceType}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_carModel}"/>
+                        <h:outputText value="#{policyController.selected.carModel}" title="#{bundle.ViewPolicyTitle_carModel}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_carFiscalPower}"/>
+                        <h:outputText value="#{policyController.selected.carFiscalPower}" title="#{bundle.ViewPolicyTitle_carFiscalPower}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_carGreycardNumber}"/>
+                        <h:outputText value="#{policyController.selected.carGreycardNumber}" title="#{bundle.ViewPolicyTitle_carGreycardNumber}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_carConstructionYear}"/>
+                        <h:outputText value="#{policyController.selected.carConstructionYear}" title="#{bundle.ViewPolicyTitle_carConstructionYear}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredRetirementAge}"/>
+                        <h:outputText value="#{policyController.selected.lifeInsuredRetirementAge}" title="#{bundle.ViewPolicyTitle_lifeInsuredRetirementAge}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredBirthDate}"/>
+                        <h:outputText value="#{policyController.selected.lifeInsuredBirthDate}" title="#{bundle.ViewPolicyTitle_lifeInsuredBirthDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredIsSmoker}"/>
+                        <p:selectBooleanCheckbox value="#{policyController.selected.lifeInsuredIsSmoker}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredHealthCovered}"/>
+                        <p:selectBooleanCheckbox value="#{policyController.selected.lifeInsuredHealthCovered}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredLoanEligible}"/>
+                        <p:selectBooleanCheckbox value="#{policyController.selected.lifeInsuredLoanEligible}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredMaxLoanAmount}"/>
+                        <h:outputText value="#{policyController.selected.lifeInsuredMaxLoanAmount}" title="#{bundle.ViewPolicyTitle_lifeInsuredMaxLoanAmount}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_lifeInsuredCapital}"/>
+                        <h:outputText value="#{policyController.selected.lifeInsuredCapital}" title="#{bundle.ViewPolicyTitle_lifeInsuredCapital}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_broker}"/>
+                        <h:outputText value="#{policyController.selected.broker}" title="#{bundle.ViewPolicyTitle_broker}"/>
+                        <h:outputText value="#{bundle.ViewPolicyLabel_client}"/>
+                        <h:outputText value="#{policyController.selected.client}" title="#{bundle.ViewPolicyTitle_client}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PolicyViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
